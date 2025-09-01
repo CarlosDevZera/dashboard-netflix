@@ -21,7 +21,6 @@ df_netflix['ano_adicionado'] = df_netflix['date_added'].dt.year
 df_netflix['ano_adicionado'] = df_netflix['ano_adicionado'].fillna(0).astype(int)
 
 # 5. Limpar a coluna de país de forma definitiva
-# (Ajuste final para lidar com vírgulas e espaços)
 df_netflix['country'] = df_netflix['country'].str.replace(', ', ',').str.replace(',', ', ').fillna('Não informado')
 
 # CONSTRUINDO O DASHBOARD
@@ -61,7 +60,7 @@ if pais_selecionado != 'Todos':
 if df_filtrado.empty:
     st.warning('Nenhum resultado encontrado para os filtros selecionados.')
 else:
-    # SEPARAR E CONTAR GÊNEROS (PARA O GRÁFICO)
+    # SEPARAR E CONTAR GÊNEROS 
     generos_contagem = df_filtrado['listed_in'].str.split(', ').explode().value_counts()
     df_generos_contagem = generos_contagem.head(10).reset_index()
     df_generos_contagem.columns = ['genero', 'contagem']
